@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Float & Clear</title>
+</head>
+<style>
+    .container{
+        display: inline-block;
+        border: 2px solid black;
+        
+    }
+    img{
+        float: right;
+    }
+    .card{
+        border: 2px solid red;
+    }
+    .card:nth-child(3){
+        clear: both;
+        /* clear: right;  maana kr deta h right m left m dekh jnna
+        clear: left;   maana kr deta h left m right m dekh jnna  */
+    }
+</style>
+<body>
+    <div class="container">
+        <img src="https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg" width="20%" alt="Photo">
+        <div class="card">Card1</div>
+        <div class="card">Card2</div>
+        <div class="card">Card3</div>
+        <div class="card">Card4</div>
+    </div>
+</body>
+
+</html>

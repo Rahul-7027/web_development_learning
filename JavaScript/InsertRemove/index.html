@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inserting and Removing Elements using JavaScript</title>
+</head>
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 23px;
+    }
+
+    .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        width: 45px;
+        border: 2px solid black;
+    }
+    .green{
+        color: green;
+        background-color: black;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="box green"  data-set="rahul bhati">Box1</div>
+        <div class="box">Box2</div>
+        <div class="box">Box3</div>
+    </div>
+</body>
+<script>
+    // console.log(document.querySelector(".container").innerText);
+    // console.log(document.querySelector(".container").innerHTML);
+    // console.log(document.querySelector(".container").outerHTML);
+    // console.log(document.querySelector(".container").tagName);
+    // console.log(document.querySelector(".container").nodeName);
+    // console.log(document.querySelector(".container").textContent);
+    // console.log(document.querySelector(".container").hidden);
+    // document.querySelector(".container").firstElementChild.innerHTML = "I am good boy"
+    // console.log(document.querySelector('.box').getAttribute('style'))
+    // document.designMode = "on"
+
+    // console.log(document.querySelector('.box').dataset)
+
+
+    // Insert the element
+
+    // let div = document.createElement("div")
+    // div.innerHTML = "New Class Add on"
+    // div.setAttribute("class", "newclass")
+    // document.querySelector(".container").append(div)
+    // before an insert the element
+    // document.querySelector(".container").before(div)
+    // After an insert the element
+    // document.querySelector(".container").after(div)
+
+    // prepand an insert the element start add on the element
+    // document.querySelector(".container").prepend(div)
+
+
+    // insertadjcent the element in the HTML
+    let tag = document.querySelector('.container')
+    // tag.insertAdjacentHTML("afterbegin","<b>Rahul is good boy</b>")
+    // tag.insertAdjacentHTML("afterend","<b>Rahul is good boy</b>")
+    // tag.insertAdjacentHTML("beforebegin","<b>Rahul is good boy</b>")
+    // tag.insertAdjacentHTML("beforeend","<b>Rahul is good boy</b>")
+
+
+
+
+    // Remove an element
+    // let remove=document.querySelector('.box')
+    // remove.remove();
+    
+
+    // ClassList and ClassName
+    // console.log(document.querySelector('.container').classList)
+    // console.log(document.querySelector('.container').className)
+
+    // Add and Remove the new CLass 
+    // console.log(document.querySelector('.container').classList.add("rahul"));
+    // console.log(document.querySelector('.container').classList.remove("rahul"))
+
+    // Toggle Class
+    console.log(document.querySelector('.container').classList.toggle('green'))
+
+
+
+</script>
+
+</html>

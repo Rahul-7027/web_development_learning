@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setInterval & setTimeout</title>
+</head>
+<style>
+        .container {
+        background-color: aqua;
+        border: 2px solid yellow;
+        margin: 10px;
+        padding: 14px;
+    }
+
+    .child {
+        background-color: rgb(34, 255, 0);
+        border: 2px solid green;
+        margin: 10px;
+    }
+
+    .childContainer {
+        background-color: rgb(255, 0, 170);
+        border: 2px solid red;
+        margin: 10px;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="child">
+            <div class="childContainer">
+                I am Container
+            </div>
+            </>
+        </div>
+</body>
+<script>
+    function getRandom(){
+        let value1 = Math.ceil(0 + Math.random() * 255);
+        let value2 = Math.ceil(0 + Math.random() * 255);
+        let value3 = Math.ceil(0 + Math.random() * 255);
+        return `rgb(${value1},${value2},${value3})`
+    }
+
+
+    // setInterval(() => {
+    //     document.querySelector('.childContainer').style.backgroundColor=getRandom();
+    // }, 3000);
+
+
+    // only one time run for certain time
+    setTimeout(() => {
+        document.querySelector('.childContainer').style.backgroundColor=getRandom();
+    }, 400);
+
+    clearTimeout(600)
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Bubbling</title>
+</head>
+<style>
+    .container {
+        background-color: aqua;
+        border: 2px solid yellow;
+        margin: 10px;
+        padding: 14px;
+    }
+
+    .child {
+        background-color: rgb(34, 255, 0);
+        border: 2px solid green;
+        margin: 10px;
+    }
+
+    .childContainer {
+        background-color: rgb(255, 0, 170);
+        border: 2px solid red;
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="child">
+            <div class="childContainer">
+                I am Container
+            </div>
+            </>
+        </div>
+</body>
+<script>
+
+    // By default bubbling hoti h sbhi events chlta h ek sath m 
+    // e.stopPropagation(); only show when click the user and show only the result 
+
+    document.querySelector('.childContainer').addEventListener("click", (e) => {
+        e.stopPropagation();
+        console.log("childContainer is clicked")
+    })
+
+    document.querySelector('.child').addEventListener("click", (e) => {
+        console.log("child is clicked")
+    })
+    document.querySelector('.container').addEventListener("click", (e) => {
+        console.log("container is clicked")
+    })
+</script>
+
+</html>

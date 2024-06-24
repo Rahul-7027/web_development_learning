@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color the Boxes</title>
+</head>
+
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 23px;
+    }
+
+    .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 45px;
+        width: 45px;
+        border: 2px solid black;
+    }
+</style>
+</head>
+
+<body>
+    <!-- 
+    Given 5 boxes, Assign a random color and a random background to each box using DOM concepts
+ -->
+    <div class="container">
+        <div class="box">Box</div>
+        <div class="box">Box</div>
+        <div class="box">Box</div>
+        <div class="box">Box</div>
+        <div class="box">Box</div>
+    </div>
+</body>
+<script>
+    // let ran = Math.ceil(0 + Math.random()* 255);
+    // console.log(ran)
+
+    // let className = document.querySelector(".container").children 
+    // console.log(className)
+    // Array.from(className).forEach(e => {
+    //     e.style.backgroundColor = ran;
+    //     e.style.color = ran
+    // })
+
+    let selector = document.querySelector(".container").children;
+    console.log(selector)
+
+    function randomColor() {
+        let value1 = Math.ceil(0 + Math.random() * 255);
+        let value2 = Math.ceil(0 + Math.random() * 255);
+        let value3 = Math.ceil(0 + Math.random() * 255);
+        return `${value1},${value2},${value3}`
+    }
+    Array.from(selector).forEach(e => {
+        e.style.backgroundColor = randomColor()
+        e.style.color = randomColor()
+    })
+</script>
+
+</html>

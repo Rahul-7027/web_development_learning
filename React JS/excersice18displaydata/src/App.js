@@ -1,11 +1,12 @@
 import './App.css';
 import Data from './components/Display/Data';
+import Navbar from './components/Nav/Navbar';
 
 function App() {
   return (
     <div className="App">
-      <h3>Hello World</h3>
-      <Data/>
+      <Navbar />
+      <Data />
     </div>
   );
 }

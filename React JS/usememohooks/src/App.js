@@ -32,7 +32,7 @@ function App() {
   // usememo hooks are used for expensive calcultion used 
   // only one time calculation are used and reduce the calculation time 
   // render rendering and cost are high 
-  const magical = useMemo(() => numbers.find(item => item.isMagical === true), [numbers])
+  const magical = useMemo(() => numbers.find(item => item.isMagical === true), [numbers,count])
   return (
     <div className="App">
       <span>Magical number is {magical.index}</span>

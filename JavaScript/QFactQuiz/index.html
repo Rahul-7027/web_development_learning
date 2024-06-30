@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Quiz</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let num = prompt("Enter your number ");
+    const fact = (num) => {
+        let temp = 1;
+
+        if (num === 0)
+            return 1;
+        for (let i = 2; i <= num; i++)
+            temp = temp * i;
+        return temp;
+    }
+    console.log(fact(num))
+
+</script>
+
+</html>

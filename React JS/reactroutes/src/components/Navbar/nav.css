@@ -1,0 +1,23 @@
+nav,
+ul {
+    display: flex;
+}
+
+nav {
+    background-color: black;
+}
+
+ul li {
+    list-style: none;
+    margin: 10px 10px;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+}
+
+.red{
+    background-color: red;
+    color: white;
+}

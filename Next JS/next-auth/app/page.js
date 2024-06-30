@@ -4,6 +4,8 @@ import { useSession, signIn, signOut } from "next-auth/react"
 export default function pages() {
   const { data: session } = useSession()
   console.log(111,session?session.user.image:session)
+
+  // using the next-auth documentation ----> https://next-auth.js.org/getting-started/example
   if(session) {
     return <>
     <div className="image">

@@ -12,18 +12,24 @@ const Nav = () => {
                                 <img className="h-7 w-auto" src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="" />
                                 <p className="sr-only">Website Title</p>
                             </a>
+
                         </div>
 
                         <div className="flex items-center justify-end gap-3">
-                                <a aria-current="page"
-                                    className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-                                    href="#">Home</a>
-                                <a className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-                                    href="#">About</a>
-                                <a className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
-                                    href="#">Contact US</a>
-                            </div>
+                            <a aria-current="page"
+                                className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
+                                href="#">Home</a>
+                            <a className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
+                                href="#">About</a>
+                            <a className="inline-block rounded-lg px-2 py-1 text-sm font-medium text-gray-900 transition-all duration-200 hover:bg-gray-100 hover:text-gray-900"
+                                href="#">Contact US</a>
+
+                            <a aria-current="page" className="flex items-cente py-4r" href="https://github.com/Rahul-7027" target='_blank'>
+                                <img className="h-7 w-auto" src="https://github.githubassets.com/assets/GitHub-Mark-ea2971cee799.png" alt="" />
+                                <p className="sr-only">Website Title</p>
+                            </a>
                         </div>
+                    </div>
                 </div>
             </header>
         </div>

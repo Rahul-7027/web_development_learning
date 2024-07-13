@@ -10,21 +10,21 @@ const Man = () => {
         password: "",
         site: ""
     })
-
+    const ref = useRef();
     const [passwordVisible, setPasswordVisible] = useState(false);
 
     const [passwordArray, setpasswordArray] = useState([])
-    const getPasswords = () => {
-        let passwords = localStorage.getItem("passwords")
-        if (passwords) {
-            setpasswordArray(JSON.parse(passwords))
-        }
+
+    const getPasswords = async () => {
+        let fetchData = await fetch("http://localhost:3000/")
+        let passwords = await fetchData.json()
+        setpasswordArray(passwords)
     }
+
     useEffect(() => {
         getPasswords()
     }, [])
 
-    const ref = useRef();
 
     const showPassData = () => {
         ref.current.src === "https://i.pinimg.com/564x/c7/c8/7c/c7c87cc1cb7bb35e0af8e116a83db8f5.jpg" ?
@@ -38,9 +38,14 @@ const Man = () => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const savePassword = () => {
+    const savePassword = async () => {
+
+        // If any such id exists in the db, delete it 
+        await fetch("http://localhost:3000/", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: form.id }) })
+
         setpasswordArray([...passwordArray, { ...form, id: uuidv4() }])
-        localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
+        await fetch("http://localhost:3000/", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...form, id: uuidv4() }) })
+
         setForm({
             username: "",
             password: "",
@@ -88,11 +93,13 @@ const Man = () => {
     }
 
     // Delete Functionality
-    const deletePassword = (id) => {
+    const deletePassword = async (id) => {
         console.log("deleteid " + id)
         const updatePassword = (passwordArray.filter(item => item.id !== id))
         setpasswordArray(updatePassword)
-        localStorage.setItem("passwords", JSON.stringify(updatePassword))
+
+        await fetch("http://localhost:3000/", { method: "DELETE", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id }) })
+        // localStorage.setItem("passwords", JSON.stringify(updatePassword))
 
         toast('Password Deleted!', {
             position: "top-right",
@@ -138,7 +145,7 @@ const Man = () => {
                 </div>
             </div>
             <div className="password">
-                <h2 className='text-center'>Your Passwords</h2>
+                <h1 className='text-center'>Your Passwords</h1>
                 {passwordArray.length === 0 && <div className='text-center'>"NO password to shows"</div>}
 
 
@@ -176,7 +183,7 @@ const Man = () => {
                                                 </lord-icon>
                                             </div>
                                         </td>
-                                        <td className=" px-6 py-4 border-separate border border-red-700 ">{item.password}
+                                        <td className=" px-6 py-4 border-separate border border-red-700 ">{"*".repeat(item.password.length)}
                                             <div className='lordiconcopy size-7 cursor-pointer' onClick={() => copyText(item.password)}>
                                                 <lord-icon src="https://cdn.lordicon.com/iykgtsbt.json" trigger="hover" >
                                                 </lord-icon>

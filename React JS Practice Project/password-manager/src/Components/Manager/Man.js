@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const Man = () => {
     const [form, setForm] = useState({
@@ -22,11 +24,9 @@ const Man = () => {
         getPasswords()
     }, [])
 
-    console.log(1111, form)
     const ref = useRef();
 
     const showPassData = () => {
-        console.log(1111, ref.current.src)
         ref.current.src === "https://i.pinimg.com/564x/c7/c8/7c/c7c87cc1cb7bb35e0af8e116a83db8f5.jpg" ?
             ref.current.src = "https://www.svgrepo.com/show/380007/eye-password-hide.svg" : ref.current.src = "https://i.pinimg.com/564x/c7/c8/7c/c7c87cc1cb7bb35e0af8e116a83db8f5.jpg";
 
@@ -39,9 +39,23 @@ const Man = () => {
     };
 
     const savePassword = () => {
-        setpasswordArray(...passwordArray, form)
-        localStorage.setItem("passwords", JSON.stringify([...passwordArray, form]))
-        console.log(passwordArray)
+        setpasswordArray([...passwordArray, { ...form, id: uuidv4() }])
+        localStorage.setItem("passwords", JSON.stringify([...passwordArray, { ...form, id: uuidv4() }]))
+        setForm({
+            username: "",
+            password: "",
+            site: ""
+        })
+        toast('Password Save', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
 
     }
 
@@ -58,12 +72,42 @@ const Man = () => {
         });
         navigator.clipboard.writeText(text)
     }
-    
 
 
+    // Data not will be fill
+    const isFormEmpty = !form.username || !form.password || !form.site
 
+    /// Edit functionality
+    const editPassword = (id) => {
+        const editData = ({ ...passwordArray.filter(i => i.id === id)[0], id: id })
+        setForm(editData);
+        setpasswordArray(passwordArray.filter(item => item.id !== id))
+
+        console.log("Edit id ", id)
+
+    }
+
+    // Delete Functionality
+    const deletePassword = (id) => {
+        console.log("deleteid " + id)
+        const updatePassword = (passwordArray.filter(item => item.id !== id))
+        setpasswordArray(updatePassword)
+        localStorage.setItem("passwords", JSON.stringify(updatePassword))
+
+        toast('Password Deleted!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+        });
+    }
     return (
         <div>
+            <ToastContainer />
 
             <div className="absolute inset-0 -z-10 h-full w-full bg-green-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"><div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-green-400 opacity-20 blur-[100px]"></div></div>
 
@@ -73,7 +117,7 @@ const Man = () => {
 
                 <h1 className='text-center  font-sans font-bold text-4xl'><span className='text-red-700'>&lt;</span>Pass<span className='text-red-700'>OP&gt;</span> </h1>
                 <p className='text-center  font-sans font-bold text-2xl'>Your own Password Manager</p>
-                <div className="text-white flex flex-col p-4 my-4 mx-0 items-center">
+                <div className="text-white flex flex-col p-4 my-4 mx-0 items-center" >
                     <input value={form.site} name="site" className='flex rounded-full w-full p-1 text-black' placeholder='Enter webiste URL ' type="text" id='' onChange={handleChange} />
 
 
@@ -88,7 +132,7 @@ const Man = () => {
                         </div>
                     </div>
 
-                    <button onClick={savePassword} className='flex justify-center items-center bg-black text-white rounded-full px-4 py-2 w-fit'>
+                    <button onClick={savePassword} disabled={isFormEmpty} className='flex justify-center items-center bg-black text-white rounded-full px-4 py-2 w-fit'>
                         <lord-icon src="https://cdn.lordicon.com/jgnvfzqg.json" trigger="hover"></lord-icon>
                         Add Password</button>
                 </div>
@@ -111,30 +155,48 @@ const Man = () => {
                                 <th scope="col" className="px-6 py-3 border-separate border border-red-700 ">
                                     Password
                                 </th>
+                                <th scope="col" className="px-6 py-3 border-separate border border-red-700 ">
+                                    Action
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            { passwordArray.map((item, index) => {
-                                console.log(333, item)
+                            {passwordArray.map((item, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-separate border border-red-700  ">{item.site}
+                                        <td className=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-separate border border-red-700  ">{item.site}
                                             <div className='lordiconcopy size-7 cursor-pointer' onClick={() => copyText(item.site)}>
                                                 <lord-icon src="https://cdn.lordicon.com/iykgtsbt.json" trigger="hover" >
                                                 </lord-icon>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-separate border border-red-700  ">{item.username}
+                                        <td className=" px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white border-separate border border-red-700  ">{item.username}
                                             <div className='lordiconcopy size-7 cursor-pointer' onClick={() => copyText(item.username)}>
                                                 <lord-icon src="https://cdn.lordicon.com/iykgtsbt.json" trigger="hover" >
                                                 </lord-icon>
                                             </div>
                                         </td>
-                                        <td className="px-6 py-4 border-separate border border-red-700 ">{item.password}
+                                        <td className=" px-6 py-4 border-separate border border-red-700 ">{item.password}
                                             <div className='lordiconcopy size-7 cursor-pointer' onClick={() => copyText(item.password)}>
                                                 <lord-icon src="https://cdn.lordicon.com/iykgtsbt.json" trigger="hover" >
                                                 </lord-icon>
                                             </div>
+                                        </td>
+
+                                        <td className=" px-6 py-4 border-separate border border-red-700 ">
+                                            <span className='cursor-pointer mx-1' onClick={() => { editPassword(item.id) }}>
+                                                <lord-icon
+                                                    src="https://cdn.lordicon.com/wuvorxbv.json"
+                                                    trigger="hover"
+                                                    style={{ width: "25px", height: "25px" }} />
+                                            </span>
+                                            <span className='cursor-pointer mx-1' onClick={() => { deletePassword(item.id) }}>
+                                                <lord-icon
+                                                    src="https://cdn.lordicon.com/drxwpfop.json"
+                                                    trigger="hover"
+                                                    style={{ width: "25px", height: "25px" }} />
+                                            </span>
+
                                         </td>
                                     </tr>
                                 )
